@@ -19,7 +19,7 @@
         <sidenav-item
           url="/tables"
           :class="getRoute() === 'tables' ? 'active' : ''"
-          :navText="this.$store.state.isRTL ? 'الجداول' : 'Tables'"
+          :navText="this.$store.state.isRTL ? 'الجداول' : 'Bookings'"
         >
           <template v-slot:icon>
             <i
@@ -32,7 +32,7 @@
         <sidenav-item
           url="/billing"
           :class="getRoute() === 'billing' ? 'active' : ''"
-          :navText="this.$store.state.isRTL ? 'الفواتیر' : 'Billing'"
+          :navText="this.$store.state.isRTL ? 'الفواتیر' : 'Hotels'"
         >
           <template v-slot:icon>
             <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
@@ -44,11 +44,24 @@
           url="/virtual-reality"
           :class="getRoute() === 'virtual-reality' ? 'active' : ''"
           :navText="
-            this.$store.state.isRTL ? 'الواقع الافتراضي' : 'Virtual Reality'
+            this.$store.state.isRTL ? 'الواقع الافتراضي' : 'Reports'
           "
         >
           <template v-slot:icon>
             <i class="ni ni-app text-info text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+      <li class="nav-item">
+        <sidenav-item
+          url="/search"
+          :class="getRoute() === 'search' ? 'active' : ''"
+          :navText="
+            this.$store.state.isRTL ? 'الواقع الافتراضي' : 'Search'
+          "
+        >
+          <template v-slot:icon>
+            <i class="ni ni-square-pin text-info text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
@@ -114,17 +127,10 @@
       </li>
     </ul>
   </div>
-  <div class="pt-3 mx-3 mt-3 sidenav-footer">
-    <sidenav-card
-      :class="cardBg"
-      textPrimary="Need Help?"
-      textSecondary="Please check our docs"
-    />
-  </div>
+
 </template>
 <script>
 import SidenavItem from "./SidenavItem.vue";
-import SidenavCard from "./SidenavCard.vue";
 
 export default {
   name: "SidenavList",
@@ -133,14 +139,13 @@ export default {
   },
   data() {
     return {
-      title: "Argon Dashboard 2",
+      title: "Booking Application",
       controls: "dashboardsExamples",
       isActive: "active"
     };
   },
   components: {
-    SidenavItem,
-    SidenavCard
+    SidenavItem
   },
   methods: {
     getRoute() {
