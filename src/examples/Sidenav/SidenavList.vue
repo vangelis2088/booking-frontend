@@ -76,6 +76,17 @@
           </template>
         </sidenav-item>
       </li>
+      <li class="nav-item">
+        <sidenav-item
+          url="/hotels"
+          :class="getRoute() === 'rtl-page' ? 'active' : ''"
+          navText="Hotelss"
+        >
+          <template v-slot:icon>
+            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
       <li class="mt-3 nav-item">
         <h6
           v-if="this.$store.state.isRTL"

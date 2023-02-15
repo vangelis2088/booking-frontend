@@ -4,6 +4,7 @@ import Tables from "../views/Tables.vue";
 import Billing from "../views/Billing.vue";
 import VirtualReality from "../views/VirtualReality.vue";
 import RTL from "../views/Rtl.vue";
+import Hotel from "../views/Hotel.vue";
 import Search from "../views/Search.vue";
 import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
@@ -39,6 +40,11 @@ const routes = [
     path: "/rtl-page",
     name: "RTL",
     component: RTL,
+  },
+  {
+    path: "/hotels",
+    name: "Hotel",
+    component: Hotel,
   },
   {
     path: "/search",
