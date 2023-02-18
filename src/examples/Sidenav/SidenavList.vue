@@ -17,9 +17,9 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-          url="/tables"
-          :class="getRoute() === 'tables' ? 'active' : ''"
-          :navText="this.$store.state.isRTL ? 'الجداول' : 'Bookings'"
+          url="/bookings"
+          :class="getRoute() === 'bookings' ? 'active' : ''"
+          :navText="this.$store.state.isRTL ? 'الجداول' : 'My Bookings'"
         >
           <template v-slot:icon>
             <i
@@ -30,25 +30,14 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-          url="/billing"
-          :class="getRoute() === 'billing' ? 'active' : ''"
-          :navText="this.$store.state.isRTL ? 'الفواتیر' : 'Hotels'"
+          url="/reservations"
+          :class="getRoute() === 'reservations' ? 'active' : ''"
+          :navText="this.$store.state.isRTL ? 'الجداول' : 'Reservations'"
         >
           <template v-slot:icon>
-            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item
-          url="/virtual-reality"
-          :class="getRoute() === 'virtual-reality' ? 'active' : ''"
-          :navText="
-            this.$store.state.isRTL ? 'الواقع الافتراضي' : 'Reports'
-          "
-        >
-          <template v-slot:icon>
-            <i class="ni ni-app text-info text-sm opacity-10"></i>
+            <i
+              class="ni ni-collection text-warning text-sm opacity-10"
+            ></i>
           </template>
         </sidenav-item>
       </li>
@@ -67,23 +56,12 @@
       </li>
       <li class="nav-item">
         <sidenav-item
-          url="/rtl-page"
-          :class="getRoute() === 'rtl-page' ? 'active' : ''"
-          navText="RTL"
-        >
-          <template v-slot:icon>
-            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item
           url="/hotels"
           :class="getRoute() === 'rtl-page' ? 'active' : ''"
-          navText="Hotelss"
+          navText="Hotels"
         >
           <template v-slot:icon>
-            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>

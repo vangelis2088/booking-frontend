@@ -3,7 +3,8 @@
     <div v-if="display_list" class="row">
       <div class="col-md-12">
         <hotel-card v-on:addition="addHotel" 
-                    v-on:edit="edit" 
+                    v-on:edit="edit"
+                    v-on:del="del" 
                     :data="hotels" 
                     />
       </div>
@@ -59,9 +60,18 @@ export default {
         },
     };
   },
+  beforeCreate() {
+    var token = localStorage.getItem('token');
+    if (token) {
+        console.log('Is Logged in');
+    } else {
+        this.$store.state.isLogged = false;
+        this.$router.push({ name: 'Signin' })
+    }
+  },
   created() {
     axios
-        .get("http://127.0.0.1:8000/api/hotels/")
+        .get("http://127.0.0.1:8000/api/hotels/?user_id=1")
         .then((response) => {
             //console.log(response.data);
             this.hotels = response.data;
@@ -109,6 +119,7 @@ export default {
                 })
                 .then((response) => {
                     console.log(response);
+                    val.id = response.data.id;
                     this.hotels.push(val);
                 })
                 .catch((err) => console.log(err.response));
@@ -136,6 +147,21 @@ export default {
                 .catch((err) => console.log(err.response));
         }
         this.display_list = true;
+    },
+    del(val) {
+        //console.log('index is:'+val);
+        var tid = this.hotels[val].id;
+        //console.log('hotel id is:'+tid);
+        let endpoint = 'http://127.0.0.1:8000/api/hotels/'+tid+'/';
+        
+        axios
+            .delete(endpoint)
+            .then((response) => {
+                console.log(response);
+                this.hotels.splice(val,1);
+            })
+            .catch((err) => console.log(err.response));
+        
     },
     close() {
         this.display_list = true;

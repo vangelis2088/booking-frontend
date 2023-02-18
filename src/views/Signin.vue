@@ -130,6 +130,7 @@ export default {
         .then((response) => {
           localStorage.setItem("token",response.data.key);
           //setAuthHeader(response.data.key);
+          this.$store.state.isLogged = true;
           this.$router.push({name:"Dashboard"});
         })
         .catch((err) => console.log(err.response));
