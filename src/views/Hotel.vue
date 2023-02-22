@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid">
+    <loader :active="loaderActive" message="Please wait 5 seconds" />
     <div v-if="display_list" class="row">
       <div class="col-md-12">
         <hotel-card v-on:addition="addHotel" 
@@ -9,7 +10,7 @@
                     />
       </div>
     </div>
-    <div v-if="!display_list" class="row">
+    <div v-if="display_form" class="row">
       <div class="col-md-12">
         <hotel-form v-on:close="close" 
                     v-on:save="save" 
@@ -25,17 +26,20 @@
 <script>
 import HotelCard from "./components/HotelCard.vue";
 import HotelForm from "./components/HotelForm.vue";
+import Loader from "./components/Loader.vue";
 import axios from "axios";
 
 export default {
   name: "Hotel",
   components: {
+    Loader,
     HotelCard,
     HotelForm
   },
   data() {
     return {
-        display_list: true,
+        display_list: false,
+        display_form: false,
         hotels: [],
         hotel: {
             id: 0,
@@ -45,6 +49,7 @@ export default {
             rooms: 0,
             owner: 0,
         },
+        loaderActive: false,
         actionForm: '', 
         salary: {
             classIcon: "text-white fas fa-landmark",
@@ -69,26 +74,31 @@ export default {
         this.$router.push({ name: 'Signin' })
     }
   },
-  created() {
-    axios
+  async created() {
+    this.showLoader();
+    await axios
         .get("http://127.0.0.1:8000/api/hotels/?user_id=1")
         .then((response) => {
-            //console.log(response.data);
             this.hotels = response.data;
-            console.log(this.hotels);
-          //localStorage.setItem("token",response.data.key);
-          //setAuthHeader(response.data.key);
-          //this.$router.push({name:"Dashboard"});
+            this.display_list = true;
         })
         .catch((err) => console.log(err.response));
+      this.hideLoader();
   },
   methods: {
+    showLoader() {
+        this.loaderActive = true;
+    },
+    hideLoader() {
+        this.loaderActive = false;
+    },
     addHotel() {
         this.hotel.name = "";
         this.hotel.desc = "";
         this.hotel.location = "";
         this.hotel.rooms = 0;
         this.display_list = false;
+        this.display_form = true;
         this.actionForm = 'add';
     },
     edit:function(str) {
@@ -98,6 +108,7 @@ export default {
         this.hotel.location = this.hotels[str].location;
         this.hotel.rooms = this.hotels[str].total_rooms;
         this.actionForm = 'edit';
+        this.display_form = true;
         this.display_list = false;
     },
     save(val) {
@@ -118,7 +129,6 @@ export default {
                     owner: val.owner
                 })
                 .then((response) => {
-                    console.log(response);
                     val.id = response.data.id;
                     this.hotels.push(val);
                 })
@@ -126,8 +136,6 @@ export default {
         }
         else {
             let endpoint = 'http://127.0.0.1:8000/api/hotels/'+val.id+'/';
-            console.log('will save edit for:'+val.id);
-            console.log(val);
             axios
                 .put(endpoint,{
                     hotel_name: val.hotel_name,
@@ -149,11 +157,8 @@ export default {
         this.display_list = true;
     },
     del(val) {
-        //console.log('index is:'+val);
         var tid = this.hotels[val].id;
-        //console.log('hotel id is:'+tid);
-        let endpoint = 'http://127.0.0.1:8000/api/hotels/'+tid+'/';
-        
+        let endpoint = 'http://127.0.0.1:8000/api/hotels/'+tid+'/';        
         axios
             .delete(endpoint)
             .then((response) => {
@@ -165,6 +170,7 @@ export default {
     },
     close() {
         this.display_list = true;
+        this.display_form = false;
     },
   },
 };

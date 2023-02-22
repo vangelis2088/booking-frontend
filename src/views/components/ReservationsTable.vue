@@ -51,7 +51,9 @@
                 <span class="text-secondary text-xs font-weight-bold">{{ item.rooms_count }}</span>
               </td>
               <td class="align-middle text-center">
-                <span class="badge badge-sm bg-gradient-success">Active</span>
+
+                <span v-if="item.status === 'ACTIVE' " class="badge badge-sm bg-gradient-success">{{ item.status }}</span>
+                <span v-else class="badge badge-sm bg-gradient-danger">{{ item.status }}</span>
               </td>
               <td class="align-middle">
                 <a

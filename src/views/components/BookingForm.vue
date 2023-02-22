@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0">Edit Reservation</p>
+                <p class="mb-0">Edit Booking</p>
                 <argon-button @click="save" color="success" size="sm" class="ms-auto"
                   >Save</argon-button
                 >
@@ -96,7 +96,7 @@ import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 
 export default {
-    name: "reservation-form",
+    name: "booking-form",
     props: {
       reservation: {
         type: Object,

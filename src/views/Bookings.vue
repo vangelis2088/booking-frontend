@@ -1,6 +1,7 @@
 <template>
   <div class="py-4 container-fluid">
-    <div class=" row">
+    <loader :active="loaderActive" message="Please wait 5 seconds" />
+    <div v-if="display_table" class="mt-4 row">
       <div class="col-12">
         <bookings-table :booking="bookings"/>
       </div>
@@ -10,11 +11,13 @@
 
 <script>
 import BookingsTable from "./components/BookingsTable.vue";
+import Loader from "./components/Loader.vue";
 import axios from "axios";
 
 export default {
   name: "bookings",
   components: {
+    Loader,
     BookingsTable
   },
   data() {
@@ -44,9 +47,20 @@ export default {
         },
       },
       bookings: [],
+      display_table: false,
+      loaderActive: false,
     };
   },
+  methods: {
+    showLoader() {
+        this.loaderActive = true;
+    },
+    hideLoader() {
+        this.loaderActive = false;
+    },
+  },
   async created() {
+    this.showLoader();
     var token = "Token " + localStorage.getItem('token');
     //var ms = this;
     await axios
@@ -57,6 +71,7 @@ export default {
         })
         .then((response) => {
             this.bookings = response.data;
+            this.display_table = true;
         })
         .catch(err => {
             if (err.response) {
@@ -68,6 +83,7 @@ export default {
             }
         });
     console.log(this.bookings);
+    this.hideLoader();
   },
   beforeCreate() {
     var token = localStorage.getItem('token');
