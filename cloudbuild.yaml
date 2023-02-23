@@ -19,7 +19,7 @@ steps:
 - name: 'gcr.io/cloud-builders/kubectl'
   args: ['apply', '-f', 'k8s/']
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster-2'
 # Step 4
 - name: 'gcr.io/cloud-builders/kubectl'
@@ -31,7 +31,7 @@ steps:
    'booking-frontend=gcr.io/gifted-cooler-378519/booking-frontend:latest'
   ]
   env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1'
+  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
   - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster-2'
   # Push the image to Google Container Registry with the latest tag
 images: [
