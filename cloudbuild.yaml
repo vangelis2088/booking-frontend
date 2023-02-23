@@ -37,3 +37,5 @@ steps:
 images: [
    'gcr.io/gifted-cooler-378519/booking-frontend:latest'
   ]
+options:
+  logging: CLOUD_LOGGING_ONLY
