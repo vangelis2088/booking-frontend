@@ -1,41 +1,18 @@
 steps:
-# Step 1
-- name: 'gcr.io/cloud-builders/docker' 
-  entrypoint: 'bash'
-  args: [
-   '-c', 
-   'docker pull gcr.io/gifted-cooler-378519/booking-frontend:latest || exit 0'
-  ]
-# Step 2
-- name: gcr.io/cloud-builders/docker
-  args: [
-   'build', 
-   '-t', 
-   'gcr.io/gifted-cooler-378519/booking-frontend:latest',
-   '.'
-  ]
-  dir: 'booking-frontend'
-# Step 3
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'k8s/']
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster-2'
-# Step 4
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: [
-   'set', 
-   'image', 
-   'deployment', 
-   'booking-frontend', 
-   'booking-frontend=gcr.io/gifted-cooler-378519/booking-frontend:latest'
-  ]
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=europe-west1-d'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=my-cluster-2'
-  # Push the image to Google Container Registry with the latest tag
-images: [
-   'gcr.io/gifted-cooler-378519/booking-frontend:latest'
-  ]
-options:
-  logging: CLOUD_LOGGING_ONLY
+# This step builds the container image.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Build
+  args:
+  - 'build'
+  - '-t'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repository/booking-frontend:$SHORT_SHA'
+  - '.'
+
+# This step pushes the image to Artifact Registry
+# The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build.
+- name: 'gcr.io/cloud-builders/docker'
+  id: Push
+  args:
+  - 'push'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/my-repository/booking-frontend:$SHORT_SHA'
