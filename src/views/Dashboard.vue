@@ -203,14 +203,5 @@ export default {
     Carousel,
     CategoriesCard,
   },
-  beforeCreate() {
-    var token = localStorage.getItem('token');
-    if (token) {
-        console.log('Is Logged in');
-    } else {
-        this.$store.state.isLogged = false;
-        this.$router.push({ name: 'Signin' })
-    }
-  },
 };
 </script>

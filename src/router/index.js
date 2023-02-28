@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/",
     name: "/",
-    redirect: "/signin",
+    redirect: "/dashboard-default",
   },
   {
     path: "/dashboard-default",
