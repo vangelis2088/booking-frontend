@@ -17,7 +17,6 @@ kind: Deployment
 metadata:
   name: booking-frontend
 spec:
-  replicas: 1
   selector:
     matchLabels:
       name: booking-frontend
@@ -31,16 +30,3 @@ spec:
         image: us-central1-docker.pkg.dev/GOOGLE_CLOUD_PROJECT/my-repository/booking-frontend:COMMIT_SHA
         ports:
         - containerPort: 80
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: booking-frontend
-spec:
-  selector:
-    app: booking-frontend
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: LoadBalancer
