@@ -77,7 +77,7 @@ export default {
   async created() {
     this.showLoader();
     await axios
-        .get("http://127.0.0.1:8000/api/hotels/?user_id=1")
+        .get("http://34.79.174.115/api/hotels/?user_id=1")
         .then((response) => {
             this.hotels = response.data;
             this.display_list = true;
