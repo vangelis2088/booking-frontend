@@ -126,7 +126,7 @@ export default {
         password: this.password,
       };
       axios
-        .post("http://34.79.174.115/api/rest-auth/login/", credentials)
+        .post("/api/rest-auth/login/", credentials)
         .then((response) => {
           localStorage.setItem("token",response.data.key);
           //setAuthHeader(response.data.key);
