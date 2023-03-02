@@ -156,7 +156,7 @@ export default {
         console.log('Will Search for location:'+sr);
         console.log('State is:'+this.$store.state.isLogged);
         await axios
-            .get("http://127.0.0.1:8000/api/hotels/?location="+sr)
+            .get("/api/hotels/?location="+sr)
             .then((response) => {
             //console.log(response.data);
             this.hotels = response.data;
@@ -175,7 +175,7 @@ export default {
         this.types.length = 0;
         var vm = this;
         await axios
-            .get("http://127.0.0.1:8000/api/rooms/?hotel_id=1")
+            .get("/api/rooms/?hotel_id=1")
             .then((response) => {
                 console.log(response.data);
                 response.data.forEach(function(item, index) {
@@ -191,7 +191,6 @@ export default {
                 });
             })
             .catch((err) => console.log(err.response));
-        console.log('FINAL:'+this.types.length);
         this.display_search = false;
         this.display_search_results = false;
         this.display_form = true;
@@ -201,7 +200,7 @@ export default {
       var hid = this.hotel_id;
       
       axios
-          .post("http://127.0.0.1:8000/api/bookings/",{
+          .post("/api/bookings/",{
             rooms_count: room.no_rooms,
             date_in: room.date_in,
             date_out: room.date_out,

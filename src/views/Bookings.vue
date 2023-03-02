@@ -64,7 +64,7 @@ export default {
     var token = "Token " + localStorage.getItem('token');
     //var ms = this;
     await axios
-        .get("http://127.0.0.1:8000/api/bookings/?user_id=1",{
+        .get("/api/bookings/?user_id=1",{
             headers: {
               'Authorization': token
             }

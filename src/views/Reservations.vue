@@ -77,7 +77,7 @@ export default {
         console.log('Saving for object with id:'+ obj.id);
         console.log(obj);
         let token = "Token " + localStorage.getItem('token');
-        let endpoint = "http://127.0.0.1:8000/api/bookings/"+obj.id+"/";
+        let endpoint = "/api/bookings/"+obj.id+"/";
 
         axios
             .put(endpoint,{
@@ -126,7 +126,7 @@ export default {
     var token = "Token " + localStorage.getItem('token');
     //var ms = this;
     await axios
-        .get("http://127.0.0.1:8000/api/bookings/?reservations=1",{
+        .get("/api/bookings/?reservations=1",{
             headers: {
               'Authorization': token
             }
