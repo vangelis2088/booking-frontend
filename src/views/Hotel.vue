@@ -112,6 +112,7 @@ export default {
         this.display_list = false;
     },
     save(val) {
+        let token = "Token " + localStorage.getItem('token');
         if (this.hotels[0]['owner']) {
             val.owner = this.hotels[0]['owner'];
         } else {
@@ -127,6 +128,10 @@ export default {
                     location: val.location,
                     total_rooms: val.total_rooms,
                     owner: val.owner
+                },{
+                headers: {
+                    'Authorization': token
+                    }
                 })
                 .then((response) => {
                     val.id = response.data.id;
