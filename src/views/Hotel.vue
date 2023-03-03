@@ -121,7 +121,7 @@ export default {
     
         if (this.actionForm == 'add') {
             axios
-                .post("http://127.0.0.1:8000/api/hotels/",{
+                .post("/api/hotels/",{
                     hotel_name: val.hotel_name,
                     hotel_description: val.description,
                     location: val.location,
@@ -135,7 +135,7 @@ export default {
                 .catch((err) => console.log(err.response));
         }
         else {
-            let endpoint = 'http://127.0.0.1:8000/api/hotels/'+val.id+'/';
+            let endpoint = '/api/hotels/'+val.id+'/';
             axios
                 .put(endpoint,{
                     hotel_name: val.hotel_name,
@@ -158,7 +158,7 @@ export default {
     },
     del(val) {
         var tid = this.hotels[val].id;
-        let endpoint = 'http://127.0.0.1:8000/api/hotels/'+tid+'/';        
+        let endpoint = '/api/hotels/'+tid+'/';        
         axios
             .delete(endpoint)
             .then((response) => {
