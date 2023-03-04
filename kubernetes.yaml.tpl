@@ -16,10 +16,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: booking-frontend
+  labels:
+    app: booking-frontend
 spec:
   selector:
     matchLabels:
-      name: booking-frontend
+      app: booking-frontend
   template:
     metadata:
       labels:
