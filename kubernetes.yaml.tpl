@@ -20,7 +20,6 @@ metadata:
     app: booking-frontend
 spec:
   selector:
-    matchLabels:
       app: booking-frontend
   template:
     metadata:
