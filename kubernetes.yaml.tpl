@@ -23,7 +23,7 @@ spec:
   template:
     metadata:
       labels:
-        name: booking-frontend
+        app: booking-frontend
     spec:
       containers:
       - name: booking-frontend
