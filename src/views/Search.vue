@@ -175,7 +175,7 @@ export default {
         this.types.length = 0;
         var vm = this;
         await axios
-            .get("/api/rooms/?hotel_id=1")
+            .get("/api/rooms/?hotel_id="+this.hotel_id)
             .then((response) => {
                 console.log(response.data);
                 response.data.forEach(function(item, index) {
@@ -205,7 +205,7 @@ export default {
             date_in: room.date_in,
             date_out: room.date_out,
             //room_id: room.type,
-            room_id: 2,
+            room_id: 3,
             hotel_id: hid,
             user_id: 1,
           }, {
