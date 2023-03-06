@@ -148,6 +148,10 @@ export default {
                     location: val.location,
                     total_rooms: val.total_rooms,
                     owner: val.owner
+                },{
+                headers: {
+                    'Authorization': token
+                    }
                 })
                 .then((response) => {
                     console.log(response);
@@ -163,10 +167,15 @@ export default {
         this.display_form = false;
     },
     del(val) {
+        let token = "Token " + localStorage.getItem('token');
         var tid = this.hotels[val].id;
         let endpoint = '/api/hotels/'+tid+'/';        
         axios
-            .delete(endpoint)
+            .delete(endpoint, {
+                headers: {
+                    'Authorization': token
+                }
+            })
             .then((response) => {
                 console.log(response);
                 this.hotels.splice(val,1);
