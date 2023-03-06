@@ -329,6 +329,13 @@ export default {
     this.$store.state.showFooter = true;
     this.$store.state.hideConfigButton = false;
     body.classList.remove("profile-overview");
-  }
+  },
+  beforeCreate() {
+    var token = localStorage.getItem('token');
+    if (!token) {
+        this.$store.state.isLogged = false;
+        this.$router.push({ name: 'Signin' });
+    }
+  },
 };
 </script>
