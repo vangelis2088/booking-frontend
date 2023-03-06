@@ -111,7 +111,7 @@ export default {
         this.display_form = true;
         this.display_list = false;
     },
-    save(val) {
+    async save(val) {
         let token = "Token " + localStorage.getItem('token');
         if (this.hotels[0]['owner']) {
             val.owner = this.hotels[0]['owner'];
@@ -121,7 +121,7 @@ export default {
         val.rooms = parseInt(val.rooms);
     
         if (this.actionForm == 'add') {
-            axios
+            await axios
                 .post("/api/hotels/",{
                     hotel_name: val.hotel_name,
                     hotel_description: val.description,
@@ -141,7 +141,7 @@ export default {
         }
         else {
             let endpoint = '/api/hotels/'+val.id+'/';
-            axios
+            await axios
                 .put(endpoint,{
                     hotel_name: val.hotel_name,
                     hotel_description: val.description,
@@ -160,6 +160,7 @@ export default {
                 .catch((err) => console.log(err.response));
         }
         this.display_list = true;
+        this.display_form = false;
     },
     del(val) {
         var tid = this.hotels[val].id;
