@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: booking-frontend
+  name: booking-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: booking-frontend
+  template:
+    metadata:
+      labels:
+        run: booking-frontend
+    spec:
+      containers:
+      - image: gcr.io/gifted-cooler-378519/booking-frontend:latest
+        name: booking-frontend
+        ports:
+        - containerPort: 8080
